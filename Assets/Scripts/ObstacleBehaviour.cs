@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ObstacleBehaviour : MonoBehaviour
+public class ObstacleBehaviour : DeathBehaviour
 {
     public float speed = 1.0f;
     private Vector3 startPosition;
@@ -21,14 +21,5 @@ public class ObstacleBehaviour : MonoBehaviour
     void Update()
     {
         transform.position = startPosition + new Vector3(0, Mathf.Sin(Time.time + offset) * speed, 0);
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            // Kill the player
-            other.gameObject.GetComponent<CharacterMovement>().Kill();
-        }
     }
 }

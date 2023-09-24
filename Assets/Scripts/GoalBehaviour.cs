@@ -6,7 +6,8 @@ public class GoalBehaviour : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        Debug.Log(other);
+        if (other.tag == "Player")
         {
             // Say that it's win
             other.GetComponent<CharacterMovement>().Freeze();

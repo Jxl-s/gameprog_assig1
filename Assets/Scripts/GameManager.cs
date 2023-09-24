@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,16 +26,24 @@ public class GameManager : MonoBehaviour
     public void SetPreviousScore(int score)
     {
         previousScore = score;
+        UpdateHud();
     }
 
     public void ResetScore()
     {
         currentScore = previousScore;
+        UpdateHud();
     }
 
     public void IncrementScore(int value)
     {
         currentScore += value;
+        UpdateHud();
+    }
+
+    private void UpdateHud()
+    {
+        // TODO: update HUD
     }
 
     public int GetScore()
@@ -57,14 +66,13 @@ public class GameManager : MonoBehaviour
     public void NextLevel()
     {
         previousScore = currentScore;
-        currentScore = 0;
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Win()
     {
         // TODO: ask to go to next level, then call following function
+        Debug.Log("Wono it!");
         NextLevel();
     }
 }

@@ -619,14 +619,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684468894}
   serializedVersion: 8
-  lengthInSec: 1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -747,7 +747,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 0.5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -6995,12 +6995,20 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 177640705034756198, guid: d9b7cd6088645954a9c562e119c21073, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 7.6229424
+      objectReference: {fileID: 0}
+    - target: {fileID: 177640705034756198, guid: d9b7cd6088645954a9c562e119c21073, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.36123133
+      objectReference: {fileID: 0}
+    - target: {fileID: 177640705034756198, guid: d9b7cd6088645954a9c562e119c21073, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.87
       objectReference: {fileID: 0}
     - target: {fileID: 177640705034756198, guid: d9b7cd6088645954a9c562e119c21073, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.83
+      value: 6.38
       objectReference: {fileID: 0}
     - target: {fileID: 177640705034756198, guid: d9b7cd6088645954a9c562e119c21073, type: 3}
       propertyPath: m_LocalPosition.z
