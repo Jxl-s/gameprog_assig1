@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         ResetScore();
+        HUDManager.Instance.SetDoubleJump(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -74,11 +75,22 @@ public class GameManager : MonoBehaviour
     {
         previousScore = currentScore;
         UpdateHud(SceneManager.GetActiveScene().buildIndex + 1);
+        HUDManager.Instance.SetDoubleJump(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Win()
     {
         NextLevel();
+    }
+
+    public void RestartGame()
+    {
+        currentScore = 0;
+        previousScore = 0;
+
+        SceneManager.LoadScene(1);
+        UpdateHud(1);
+        HUDManager.Instance.SetDoubleJump(false);
     }
 }
