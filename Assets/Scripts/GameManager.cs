@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         if (!Instance)
         {
             Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(Instance);
         }
         else
@@ -101,5 +102,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
         UpdateHud(1);
         UpdateDoubleJump(false);
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        UpdateHud();
     }
 }
