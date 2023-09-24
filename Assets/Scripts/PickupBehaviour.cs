@@ -9,13 +9,12 @@ public class PickupBehaviour : MonoBehaviour
     public GameObject emitter;
 
     // Appearance
-    private readonly float spinSpeed = 10.0f;
+    private readonly float spinSpeed = 100.0f;
     private readonly float hoverAmplitude = 0.5f;
     private readonly float appearDelay = 30.0f;
-    private readonly float spinRate = 10.0f;
 
     // Game
-    private readonly int pickupAmount = 50;
+    private readonly int pickupScore = 50;
 
     private Vector3 startPosition;
     private float offset;
@@ -29,8 +28,8 @@ public class PickupBehaviour : MonoBehaviour
     void Update()
     {
         transform.position = startPosition + new Vector3(0, Mathf.Sin(Time.time + offset) * hoverAmplitude, 0);
-        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime * spinRate);
-        transform.Rotate(Vector3.right, spinSpeed * Time.deltaTime * spinRate);
+        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+        transform.Rotate(Vector3.right, spinSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,14 +44,15 @@ public class PickupBehaviour : MonoBehaviour
         if (CompareTag("YellowPickup"))
         {
             cube.SetActive(false);
-            GameManager.Instance.IncrementScore(pickupAmount);
+            GameManager.Instance.IncrementScore(pickupScore);
         }
 
+        // Blue pickups allow for double jumping
         if (CompareTag("BluePickup"))
         {
             other.GetComponent<CharacterMovement>().canDoubleJump = true;
             cube.SetActive(false);
-            Invoke("EnableObject", appearDelay);
+            Invoke(nameof(EnableObject), appearDelay);
         }
     }
 

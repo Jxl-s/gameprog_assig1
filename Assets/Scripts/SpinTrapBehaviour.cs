@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class SpinTrapBehaviour : DeathBehaviour
 {
-    // Start is called before the first frame update
     public float rotationSpeed = 10.0f;
-
-    Rigidbody rigidBody;
-
+    private Rigidbody rigidBody;
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();

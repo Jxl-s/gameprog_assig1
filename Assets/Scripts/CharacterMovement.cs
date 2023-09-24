@@ -173,13 +173,6 @@ public class CharacterMovement : MonoBehaviour
         emitter.transform.position = transform.position + new Vector3(0, 2, 0);
         emitter.GetComponent<ParticleSystem>().Play();
         gameObject.SetActive(false);
-
-        Invoke("MakeRestart", 1.0f);
-    }
-
-    private void MakeRestart()
-    {
-        GameManager.Instance.GameOver();
     }
 
     public void Freeze()
