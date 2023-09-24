@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+
     public static GameManager Instance { get; private set; }
     private static int previousScore = 0;
     private static int currentScore = 0;
+
 
     private void Awake()
     {
@@ -23,6 +25,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        UpdateHud();
+    }
     public void SetPreviousScore(int score)
     {
         previousScore = score;
@@ -43,8 +49,14 @@ public class GameManager : MonoBehaviour
 
     private void UpdateHud()
     {
-        // TODO: update HUD
+        HUDManager.Instance.UpdateHUD(currentScore, SceneManager.GetActiveScene().buildIndex);
     }
+
+    private void UpdateHud(int level)
+    {
+        HUDManager.Instance.UpdateHUD(currentScore, level);
+    }
+
 
     public int GetScore()
     {
@@ -53,26 +65,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // TODO: ask player if they want to restart. if they do, we call this method below
-        Restart();
-    }
-
-    public void Restart()
-    {
         ResetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+
     public void NextLevel()
     {
         previousScore = currentScore;
+        UpdateHud(SceneManager.GetActiveScene().buildIndex + 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Win()
     {
-        // TODO: ask to go to next level, then call following function
-        Debug.Log("Wono it!");
         NextLevel();
     }
 }

@@ -138,6 +138,7 @@ public class CharacterMovement : MonoBehaviour
                 {
                     gravity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                     canDoubleJump = false;
+                    HUDManager.Instance.SetDoubleJump(false);
                     animator.SetTrigger("IsDoubleJumping");
                 }
             }
