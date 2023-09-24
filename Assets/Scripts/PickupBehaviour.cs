@@ -12,23 +12,25 @@ public class PickupBehaviour : MonoBehaviour
     private readonly float spinSpeed = 10.0f;
     private readonly float hoverAmplitude = 0.5f;
     private readonly float appearDelay = 30.0f;
+    private readonly float spinRate = 10.0f;
 
     // Game
     private readonly int pickupAmount = 50;
 
     private Vector3 startPosition;
-    private float timeOffset;
+    private float offset;
 
     void Start()
     {
         startPosition = transform.position;
-        timeOffset = Random.Range(0, 10);
+        offset = Random.Range(0, 2 * Mathf.PI);
     }
 
     void Update()
     {
-        transform.position = startPosition + new Vector3(0, Mathf.Sin(Time.time + timeOffset) * hoverAmplitude, 0);
-        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime);
+        transform.position = startPosition + new Vector3(0, Mathf.Sin(Time.time + offset) * hoverAmplitude, 0);
+        transform.Rotate(Vector3.up, spinSpeed * Time.deltaTime * spinRate);
+        transform.Rotate(Vector3.right, spinSpeed * Time.deltaTime * spinRate);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +40,6 @@ public class PickupBehaviour : MonoBehaviour
         if (!cube.activeSelf) return;
 
         emitter.GetComponent<ParticleSystem>().Play();
-        Invoke("StopParticles", 0.5f);
 
         // Yellow pickups award 50 points
         if (CompareTag("YellowPickup"))
@@ -53,11 +54,6 @@ public class PickupBehaviour : MonoBehaviour
             cube.SetActive(false);
             Invoke("EnableObject", appearDelay);
         }
-    }
-
-    private void StopParticles()
-    {
-        emitter.GetComponent<ParticleSystem>().Stop();
     }
 
     private void EnableObject()
