@@ -9,16 +9,18 @@ public class FinishButtons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
         scoreText.text = "Final Score: " + GameManager.Instance.GetScore();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void OnRestart() {
+    public void OnRestart()
+    {
         GameManager.Instance.RestartGame();
     }
 }
