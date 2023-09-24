@@ -44,17 +44,27 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // TODO: ask player if they want to restart. if they do, we reset their score
+        // TODO: ask player if they want to restart. if they do, we call this method below
+        Restart();
+    }
+
+    public void Restart()
+    {
         ResetScore();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void Win()
+    public void NextLevel()
     {
-        // TODO: ask to go to next level
         previousScore = currentScore;
         currentScore = 0;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void Win()
+    {
+        // TODO: ask to go to next level, then call following function
+        NextLevel();
     }
 }
