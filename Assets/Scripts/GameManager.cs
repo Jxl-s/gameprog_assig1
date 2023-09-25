@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public void UpdateDoubleJump(bool canJump)
     {
         if (HUDManager.Instance == null) return;
-        HUDManager.Instance.SetDoubleJump(canJump);
+        HUDManager.Instance.SetDoubleJump(canJump ? HUDManager.DoubleState.True : HUDManager.DoubleState.False);
     }
 
 
@@ -104,7 +104,8 @@ public class GameManager : MonoBehaviour
         UpdateDoubleJump(false);
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         UpdateHud();
     }
 }

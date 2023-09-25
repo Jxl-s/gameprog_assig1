@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class HUDManager : MonoBehaviour
 {
+    public enum DoubleState
+    {
+        True,
+        False,
+        Used
+    }
+
     public static HUDManager Instance { get; private set; }
 
     public TMPro.TextMeshProUGUI scoreText;
@@ -29,7 +36,7 @@ public class HUDManager : MonoBehaviour
     public void UpdateHUD(int score, int level)
     {
 
-        string[] levels = { "Grass Lands", "Icebergs", "Volcano" };
+        string[] levels = { "Verdant Vista", "Glacial Grotto", "Obsidian Abyss" };
         if (level <= levels.Length)
         {
             scoreText.text = "Score: " + score;
@@ -42,9 +49,20 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    public void SetDoubleJump(bool canJump)
+    public void SetDoubleJump(DoubleState canJump)
     {
         // disable or enable
-        doubleJumpText.text = canJump ? "DOUBLE JUMP!" : "";
+        if (canJump == DoubleState.True) {
+            doubleJumpText.color = Color.green;
+            doubleJumpText.text = "Double Jump Available!";
+        }
+        else if (canJump == DoubleState.False) {
+            doubleJumpText.color = Color.red;
+            doubleJumpText.text = "";
+        }
+        else if (canJump == DoubleState.Used) {
+            doubleJumpText.color = Color.yellow;
+            doubleJumpText.text = "DOUBLE JUMP!!!";
+        }
     }
 }

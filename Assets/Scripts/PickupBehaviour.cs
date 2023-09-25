@@ -51,7 +51,7 @@ public class PickupBehaviour : MonoBehaviour
         if (CompareTag("BluePickup"))
         {
             other.GetComponent<CharacterMovement>().canDoubleJump = true;
-            HUDManager.Instance.SetDoubleJump(true);
+            HUDManager.Instance.SetDoubleJump(HUDManager.DoubleState.True);
 
             cube.SetActive(false);
             Invoke(nameof(EnableObject), appearDelay);

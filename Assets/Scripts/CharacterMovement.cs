@@ -27,6 +27,8 @@ public class CharacterMovement : MonoBehaviour
     private float walkSpeed = 4;
     private float runSpeed = 6;
 
+    private bool jumped = false;
+    private bool doubleJumped = false;
 
     private void Start()
     {
@@ -117,8 +119,19 @@ public class CharacterMovement : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
         {
+            jumped = false;
+            if (doubleJumped)
+            {
+                doubleJumped = false;
+
+                if (!canDoubleJump) {
+                    HUDManager.Instance.SetDoubleJump(HUDManager.DoubleState.False);
+                }
+            }
+
             if (Input.GetButtonDown("Jump"))
             {
+                jumped = true;
                 gravity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                 animator.SetTrigger("IsJumping");
             }
@@ -132,13 +145,15 @@ public class CharacterMovement : MonoBehaviour
         {
             // Since there is no physics applied on character controller we have this applies to reapply gravity
             gravity.y += gravityValue * Time.deltaTime;
-            if (canDoubleJump)
+            if (canDoubleJump && jumped && !doubleJumped)
             {
                 if (Input.GetButtonDown("Jump"))
                 {
-                    gravity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                    doubleJumped = true;
                     canDoubleJump = false;
-                    HUDManager.Instance.SetDoubleJump(false);
+
+                    HUDManager.Instance.SetDoubleJump(HUDManager.DoubleState.Used);
+                    gravity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
                     animator.SetTrigger("IsDoubleJumping");
                 }
             }
