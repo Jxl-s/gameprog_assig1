@@ -31,6 +31,17 @@ public class GameManager : MonoBehaviour
         UpdateHud();
     }
 
+    void AdjustColliders()
+    {
+        BoxCollider[] colliders = FindObjectsOfType<BoxCollider>();
+        Debug.Log(colliders);
+
+        foreach (BoxCollider collider in colliders)
+        {
+            collider.size = new Vector3(1, 1, 1);
+        }
+    }
+
     public void SetPreviousScore(int score)
     {
         previousScore = score;
@@ -106,6 +117,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        AdjustColliders();
         UpdateHud();
     }
 }
