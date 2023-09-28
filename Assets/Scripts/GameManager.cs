@@ -31,11 +31,12 @@ public class GameManager : MonoBehaviour
         UpdateHud();
     }
 
+    /**
+     * Adjusts the colliders of all objects in the scene to be 1 x 1 x 1
+     */
     void AdjustColliders()
     {
         BoxCollider[] colliders = FindObjectsOfType<BoxCollider>();
-        Debug.Log(colliders);
-
         foreach (BoxCollider collider in colliders)
         {
             collider.size = new Vector3(1, 1, 1);

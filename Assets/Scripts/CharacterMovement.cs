@@ -47,11 +47,19 @@ public class CharacterMovement : MonoBehaviour
 
         UpdateRotation();
         ProcessCamera();
+        CheckFallingDeath();
     }
 
     public void LateUpdate()
     {
         UpdateAnimator();
+    }
+
+    // Die if fall
+    void CheckFallingDeath() {
+        if (transform.position.y < -25) {
+            Kill();
+        }
     }
 
     void UpdateRotation()
