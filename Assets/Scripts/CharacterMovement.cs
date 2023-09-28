@@ -15,7 +15,7 @@ public class CharacterMovement : MonoBehaviour
     public bool groundedPlayer;
 
     public float mouseSensitivyX = 5.0f;
-    public float mouseSensitivyY = 2.5f;
+    public float mouseSensitivyY = 5.0f;
 
     private Vector3 move;
     private float jumpHeight = 1f;
@@ -59,7 +59,7 @@ public class CharacterMovement : MonoBehaviour
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSensitivyX, 0, Space.Self);
 
         // rotate the follow part
-        float rotationX = followPart.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * 1.5f;
+        float rotationX = followPart.transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * mouseSensitivyY;
         if (rotationX > 45 && rotationX < 90)
         {
             rotationX = 45;
