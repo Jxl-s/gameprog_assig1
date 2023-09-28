@@ -45,21 +45,18 @@ public class CharacterMovement : MonoBehaviour
             ProcessMovement();
         }
 
-        ProcessCamera();
         UpdateRotation();
+        ProcessCamera();
     }
 
     public void LateUpdate()
     {
         UpdateAnimator();
     }
+
     void UpdateRotation()
     {
         transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSensitivyX, 0, Space.Self);
-
-        // my attempt at supporting vertical rotation
-        // Vector3 eulers = followPart.transform.rotation.eulerAngles;
-        // followPart.transform.rotation = Quaternion.Euler(Input.GetAxis("Mouse Y") * mouseSensitivyY, eulers.y, eulers.z);
     }
 
     void UpdateAnimator()
@@ -124,7 +121,8 @@ public class CharacterMovement : MonoBehaviour
             {
                 doubleJumped = false;
 
-                if (!canDoubleJump) {
+                if (!canDoubleJump)
+                {
                     HUDManager.Instance.SetDoubleJump(HUDManager.DoubleState.False);
                 }
             }
@@ -168,9 +166,14 @@ public class CharacterMovement : MonoBehaviour
 
     void ProcessCamera()
     {
-        // third person camera
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, transform.position + new Vector3(0, 1.5f, -6), 0.1f);
+        // Calculate desired camera position (behind character)
+        Vector3 desiredPosition = followPart.transform.position - followPart.transform.forward * 3;
+
+        // Move camera
+        Camera.main.transform.position = desiredPosition;
+        Camera.main.transform.LookAt(followPart.transform.position);
     }
+
 
     float GetMovementSpeed()
     {
