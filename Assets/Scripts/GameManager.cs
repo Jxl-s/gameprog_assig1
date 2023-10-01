@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
 {
 
     public static GameManager Instance { get; private set; }
-    private static int previousScore = 0;
-    private static int currentScore = 0;
+    private int previousScore = 0;
+    private int currentScore = 0;
 
 
     private void Awake()
